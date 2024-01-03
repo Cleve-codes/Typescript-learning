@@ -244,17 +244,31 @@ const infiniteLoop = () => {
 //   return typeof input === "string";
 // };
 
-
-
 // Lesson 5 - Type Assertions
-type one = string
-type two = string | number
-type three = 'Hello'
+type one = string;
+type two = string | number;
+type three = "Hello";
 
 // Convert to more or less specific types
-let a: one = 'Hello'
-let b = a as two // b is now a string or number
-let c = b as three // c is now literally 'Hello'
+let a: one = "Hello";
+let b = a as two; // b is now a string or number
+let c = b as three; // c is now literally 'Hello'
 
-let d = <one>'Hello' // d is now a string
-let e = <string | number>'Hello' // e is now a string or number
+let d = <one>"Hello"; // d is now a string
+let e = <string | number>"Hello"; // e is now a string or number
+
+// Usecase - Assertions for narrowing
+const addOrConcat = (
+  a: number,
+  b: number,
+  c: "add" | "concat"
+): number | string => {
+  if (c === "add") return a + b;
+  return `` + a + b;
+};
+
+let myVal: number = addOrConcat(1, 2, "add") as number ;
+
+// Usecase - Double Assertions for type conversion
+10 as string; // Error
+10 as unknown as string; // No Error
