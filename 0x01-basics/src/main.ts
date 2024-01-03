@@ -80,51 +80,101 @@ const exampleObj = {
 // exampleObj.canVote = "Yes"; // Error
 
 // Object Types annotations
-type Person = {
-  name: string;
-  age: (string | number)[];
-  canVote: boolean;
-};
+// type Person = {
+//   name: string;
+//   age: (string | number)[];
+//   canVote: boolean;
+// };
 
-interface PersonInterface {
-  name?: string;
-  age: (string | number)[];
-  canVote: boolean;
-}
+// interface PersonInterface {
+//   name?: string;
+//   age: (string | number)[];
+//   canVote: boolean;
+// }
 
-let person: Person = {
-  name: "Cleve",
-  age: [20, "twenty"],
-  canVote: true,
-};
+// let person: Person = {
+//   name: "Cleve",
+//   age: [20, "twenty"],
+//   canVote: true,
+// };
 
-let person2: PersonInterface = {
-  name: "Cleve",
-  age: [20, "twenty"],
-  canVote: true,
-};
+// let person2: PersonInterface = {
+//   name: "Cleve",
+//   age: [20, "twenty"],
+//   canVote: true,
+// };
 
-const greetPerson = (person: Person) => {
-  return `Hello ${person.name}`!;
-};
+// const greetPerson = (person: Person) => {
+//   return `Hello ${person.name}`!;
+// };
 
-const greetPerson2 = (person: PersonInterface) => {
-  if (person.name) {
-    return `Hello ${person.name?.toUpperCase()}`!;
-  }
-  return `Hello`!;
-};
+// const greetPerson2 = (person: PersonInterface) => {
+//   if (person.name) {
+//     return `Hello ${person.name?.toUpperCase()}`!;
+//   }
+//   return `Hello`!;
+// };
 
-console.log(greetPerson(person));
-console.log(greetPerson2(person2));
+// console.log(greetPerson(person));
+// console.log(greetPerson2(person2));
 
 // Enums - Are added to the language at runtime
+// enum Direction {
+//   Up,
+//   Down,
+//   Left,
+//   Right,
+// }
 
-enum Direction {
-  Up,
-  Down,
-  Left,
-  Right,
+// console.log(Direction.Up); // 0
+
+// Lesson 4 - Functions
+// Type Aliases - Represent a type that already exists with a different name
+type StringOrNum = string | number;
+type StringOrNumArr = StringOrNum[];
+
+type Person = {
+  name: string;
+  age: StringOrNumArr;
+  canVote: boolean;
+};
+
+// Literal Types - Represent a value that is a string or number
+type Direction = "up" | "down" | "left" | "right";
+let userName: "Cleve" | "Isaac" | "Mzee";
+// userName = 'Msee' // Error
+
+// Functions
+// function with return type
+const add = (a: number, b: number): number => {
+  return a + b;
+};
+
+add(5, 10);
+
+
+// function with no return type
+const logMsg = (msg: any): void => {
+  console.log(msg);
 }
 
-console.log(Direction.Up); // 0
+// logMsg('Hello World');
+// logMsg(add(5, 10));
+// logMsg(add(5, '10')) // Error
+
+// function types
+type mathFunc = (a: number, b: number) => number;
+
+let multiplicationFunc: mathFunc = (a, b) => {
+  return a * b;
+};
+
+logMsg(multiplicationFunc(5, 10));
+
+// interface MathFuncInterface {
+//   (a: number, b: number): number;
+// }
+
+// let subtractionFunc: MathFuncInterface = (a, b) => {
+//   return a - b;
+// }
