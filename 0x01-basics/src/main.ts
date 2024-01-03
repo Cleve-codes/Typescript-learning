@@ -316,8 +316,15 @@ class coder {
   greet() {
     return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
   }
+
+  public getAge() {
+    return this.age;
+  }
 }
 
 const coder1 = new coder("Cleve", 20, true);
 console.log(coder1.greet());
+console.log(coder1.getAge());
+console.log(coder1.age);
+console.log(coder1.canVote);
 
