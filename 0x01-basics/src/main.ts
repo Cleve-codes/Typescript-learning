@@ -204,42 +204,57 @@ const exampleObj = {
 // logMsg(sumAll(5, 10, 15));
 
 // Rest Parameters
-const sumAll = (...nums: number[]): number => {
-  return nums.reduce((acc, curr) => acc + curr, 0);
-};
+// const sumAll = (...nums: number[]): number => {
+//   return nums.reduce((acc, curr) => acc + curr, 0);
+// };
 
-const sumAll2 = (a: number, b: number, ...nums: number[]): number => {
-  return nums.reduce((acc, curr) => acc + curr, a + b);
-};
+// const sumAll2 = (a: number, b: number, ...nums: number[]): number => {
+//   return nums.reduce((acc, curr) => acc + curr, a + b);
+// };
 
-console.log(sumAll(1, 2, 1, 3)); // 7
+// console.log(sumAll(1, 2, 1, 3)); // 7
 
-console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
+// console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
 
 // The never type
-const throwError = (msg: string): never => {
-  throw new Error(msg);
-};
+// const throwError = (msg: string): never => {
+//   throw new Error(msg);
+// };
 
-console.log(throwError("Error Message"));
+// console.log(throwError("Error Message"));
 
 const infiniteLoop = () => {
   while (!true) {}
 };
 
 // Using the never type
-const numberOrString = (input: number | string): string => {
-  if (isNumber(input)) return `Your number is ${input}`;
+// const numberOrString = (input: number | string): string => {
+//   if (isNumber(input)) return `Your number is ${input}`;
 
-  if (isString(input)) return `Your string is ${input}`;
-  return throwError("This function only accepts a string or number");
-};
+//   if (isString(input)) return `Your string is ${input}`;
+//   return throwError("This function only accepts a string or number");
+// };
 
 // Custom Type Guards - Used to narrow down the type of a variable
-const isNumber = (input: any): input is number => {
-  return typeof input === "number";
-};
+// const isNumber = (input: any): input is number => {
+//   return typeof input === "number";
+// };
 
-const isString = (input: any): input is string => {
-  return typeof input === "string";
-};
+// const isString = (input: any): input is string => {
+//   return typeof input === "string";
+// };
+
+
+
+// Lesson 5 - Type Assertions
+type one = string
+type two = string | number
+type three = 'Hello'
+
+// Convert to more or less specific types
+let a: one = 'Hello'
+let b = a as two // b is now a string or number
+let c = b as three // c is now literally 'Hello'
+
+let d = <one>'Hello' // d is now a string
+let e = <string | number>'Hello' // e is now a string or number
