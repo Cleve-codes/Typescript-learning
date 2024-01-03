@@ -270,5 +270,12 @@ const addOrConcat = (
 let myVal: number = addOrConcat(1, 2, "add") as number ;
 
 // Usecase - Double Assertions for type conversion
-10 as string; // Error
-10 as unknown as string; // No Error
+// 10 as string; // Error
+// 10 as unknown as string; // No Error
+
+// Usecase - Assertions for DOM manipulation
+const img = document.querySelector('img')!
+const myImg = document.querySelector('#img') as HTMLImageElement
+
+img.src
+myImg.src  // No Error
