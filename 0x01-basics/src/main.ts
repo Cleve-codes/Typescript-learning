@@ -130,45 +130,45 @@ const exampleObj = {
 
 // Lesson 4 - Functions
 // Type Aliases - Represent a type that already exists with a different name
-type StringOrNum = string | number;
-type StringOrNumArr = StringOrNum[];
+// type StringOrNum = string | number;
+// type StringOrNumArr = StringOrNum[];
 
-type Person = {
-  name: string;
-  age: StringOrNumArr;
-  canVote: boolean;
-};
+// type Person = {
+//   name: string;
+//   age: StringOrNumArr;
+//   canVote: boolean;
+// };
 
 // Literal Types - Represent a value that is a string or number
-type Direction = "up" | "down" | "left" | "right";
-let userName: "Cleve" | "Isaac" | "Mzee";
+// type Direction = "up" | "down" | "left" | "right";
+// let userName: "Cleve" | "Isaac" | "Mzee";
 // userName = 'Msee' // Error
 
 // Functions
 // function with return type
-const add = (a: number, b: number): number => {
-  return a + b;
-};
+// const add = (a: number, b: number): number => {
+//   return a + b;
+// };
 
-add(5, 10);
+// add(5, 10);
 
 // function with no return type
-const logMsg = (msg: any): void => {
-  console.log(msg);
-};
+// const logMsg = (msg: any): void => {
+//   console.log(msg);
+// };
 
 // logMsg('Hello World');
 // logMsg(add(5, 10));
 // logMsg(add(5, '10')) // Error
 
 // function types
-type mathFunc = (a: number, b: number) => number;
+// type mathFunc = (a: number, b: number) => number;
 
-let multiplicationFunc: mathFunc = (a, b) => {
-  return a * b;
-};
+// let multiplicationFunc: mathFunc = (a, b) => {
+//   return a * b;
+// };
 
-logMsg(multiplicationFunc(5, 10));
+// logMsg(multiplicationFunc(5, 10));
 
 // interface MathFuncInterface {
 //   (a: number, b: number): number;
@@ -179,26 +179,39 @@ logMsg(multiplicationFunc(5, 10));
 // }
 
 // Optional Parameters
-const addAll = (a: number, b: number, c?: number): number => {
-  if (typeof c !== "undefined") {
-    return a + b + c;
-  }
-  return a + b;
-};
+// const addAll = (a: number, b: number, c?: number): number => {
+//   if (typeof c !== "undefined") {
+//     return a + b + c;
+//   }
+//   return a + b;
+// };
 
 // Default Parameters
-const sumAll = (a: number, b: number, c: number = 2): number => {
-  return a + b + c;
+// const sumAll = (a: number, b: number, c: number = 2): number => {
+//   return a + b + c;
+// };
+
+// const sumAll2 = (a: number = 10, b: number, c: number = 2): number => {
+//   return a + b + c;
+// }
+
+// logMsg(sumAll2(1,2)) // 5 - a = 1, b = 2, c = 2
+// logMsg(sumAll2(undefined, 2)) // 14 - a = 10, b = 2, c = 2
+
+// logMsg(addAll(5, 10));
+// logMsg(sumAll(5, 10));
+// logMsg(addAll(5, 10, 15));
+// logMsg(sumAll(5, 10, 15));
+
+// Rest Parameters
+const sumAll = (...nums: number[]): number => {
+  return nums.reduce((acc, curr) => acc + curr, 0);
 };
 
-const sumAll2 = (a: number = 10, b: number, c: number = 2): number => {
-  return a + b + c;
-}
+const sumAll2 = (a: number, b: number, ...nums: number[]): number => {
+  return nums.reduce((acc, curr) => acc + curr, a + b);
+};
 
-logMsg(sumAll2(1,2)) // 5 - a = 1, b = 2, c = 2
-logMsg(sumAll2(undefined, 2)) // 14 - a = 10, b = 2, c = 2
+console.log(sumAll(1, 2, 3, 4, 5)); // 15
 
-logMsg(addAll(5, 10));
-logMsg(sumAll(5, 10));
-logMsg(addAll(5, 10, 15));
-logMsg(sumAll(5, 10, 15));
+console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
