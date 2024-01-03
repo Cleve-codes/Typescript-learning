@@ -212,6 +212,25 @@ const sumAll2 = (a: number, b: number, ...nums: number[]): number => {
   return nums.reduce((acc, curr) => acc + curr, a + b);
 };
 
-console.log(sumAll(1, 2, 3, 4, 5)); // 15
+console.log(sumAll(1, 2, 1, 3)); // 7
 
 console.log(sumAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)); // 55
+
+// The never type
+const throwError = (msg: string): never => {
+  throw new Error(msg);
+};
+
+console.log(throwError("Error Message"));
+
+const infiniteLoop = () => {
+  while (!true) {}
+};
+
+// Using the never type
+const numberOrString = (input: number | string): string => {
+  if (typeof input === "number") return `Your number is ${input}`;
+
+  if (typeof input === "string") return `Your string is ${input}`;
+  return throwError("This function only accepts a string or number");
+};
