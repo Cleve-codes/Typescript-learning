@@ -152,11 +152,10 @@ const add = (a: number, b: number): number => {
 
 add(5, 10);
 
-
 // function with no return type
 const logMsg = (msg: any): void => {
   console.log(msg);
-}
+};
 
 // logMsg('Hello World');
 // logMsg(add(5, 10));
@@ -178,3 +177,28 @@ logMsg(multiplicationFunc(5, 10));
 // let subtractionFunc: MathFuncInterface = (a, b) => {
 //   return a - b;
 // }
+
+// Optional Parameters
+const addAll = (a: number, b: number, c?: number): number => {
+  if (typeof c !== "undefined") {
+    return a + b + c;
+  }
+  return a + b;
+};
+
+// Default Parameters
+const sumAll = (a: number, b: number, c: number = 2): number => {
+  return a + b + c;
+};
+
+const sumAll2 = (a: number = 10, b: number, c: number = 2): number => {
+  return a + b + c;
+}
+
+logMsg(sumAll2(1,2)) // 5 - a = 1, b = 2, c = 2
+logMsg(sumAll2(undefined, 2)) // 14 - a = 10, b = 2, c = 2
+
+logMsg(addAll(5, 10));
+logMsg(sumAll(5, 10));
+logMsg(addAll(5, 10, 15));
+logMsg(sumAll(5, 10, 15));
