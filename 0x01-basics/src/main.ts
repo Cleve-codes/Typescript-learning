@@ -306,11 +306,13 @@ class coder {
   constructor(
     public readonly name: string,
     private age: number,
+    protected lang: string = "TypeScript",
     protected canVote: boolean
   ){
     this.name = name;
     this.age = age;
     this.canVote = canVote;
+    this.lang = lang;
   }
 
   greet() {
@@ -322,9 +324,53 @@ class coder {
   }
 }
 
-const coder1 = new coder("Cleve", 20, true);
+const coder1 = new coder("Cleve", 20, 'JS' ,true);
 console.log(coder1.greet());
 console.log(coder1.getAge());
-console.log(coder1.age);
-console.log(coder1.canVote);
+// console.log(coder1.aanVote)ge);
+// console.log(coder1.c;
 
+// EXtening Classes
+class WebDev extends coder {
+  constructor(
+    public computer: string,
+    name: string,
+    lang: string,
+    age: number,
+    canVote: boolean
+  )
+  {
+    super(name, age, '' ,canVote);
+    this.computer = computer;
+  }
+
+  getLang() {
+    return this.lang;
+  }
+}
+
+/////////////////////////////////////////////////
+
+// Interfaces
+interface Musician {
+  name: string,
+  instrument: string,
+  play(action: string): string
+}
+
+class Guitarist implements Musician {
+  name: string;
+  instrument: string;
+
+  constructor(name: string, instrument: string) {
+    this.name = name;
+    this.instrument = instrument;
+  }
+
+  play(action: string): string {
+    return `${this.name} ${action} the ${this.instrument}`;
+  }
+}
+
+const guitarist = new Guitarist('Cleve', 'Guitar');
+console.log(guitarist.play('plays'));
