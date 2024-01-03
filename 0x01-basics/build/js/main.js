@@ -37,26 +37,26 @@
 // moreMixed.push(9);
 // moreMixed.push(false);
 // moreMixed.push({ name: "Cleve" }); // Error
-let arr = [];
-arr.push("one");
-// Tuples
-let myTuple = ["one", 2, true];
-let mixedArr = ["one", 2, true];
+// let arr: string[] = [];
+// arr.push("one");
+// // Tuples
+// let myTuple: [string, number, boolean] = ["one", 2, true];
+// let mixedArr = ["one", 2, true];
 // myTuple =
 //   mixedArr; /* Error - Returns an error because the types are different, but the structure is the same */
 // mixedArr =
 //   myTuple; /* No Error - Returns no error because in Ts when assigning a
 // tuple to an array, it will only check the structure and not the types */
 // Objects
-let myObj;
-myObj = []; // No Error
-console.log(typeof myObj);
-myObj = {}; // No Error
-const exampleObj = {
-    name: "Cleve",
-    age: 20,
-    canVote: true,
-};
+// let myObj: object;
+// myObj = []; // No Error
+// console.log(typeof myObj);
+// myObj = {}; // No Error
+// const exampleObj = {
+//   name: "Cleve",
+//   age: 20,
+//   canVote: true,
+// };
 // exampleObj.name = 20; // Error
 // exampleObj.age = "Cleve"; // Error
 // exampleObj.canVote = "Yes"; // Error
@@ -172,27 +172,154 @@ const exampleObj = {
 //   throw new Error(msg);
 // };
 // console.log(throwError("Error Message"));
-const infiniteLoop = () => {
-    while (!true) { }
-};
+// const infiniteLoop = () => {
+//   while (!true) {}
+// };
+// Using the never type
+// const numberOrString = (input: number | string): string => {
+//   if (isNumber(input)) return `Your number is ${input}`;
+//   if (isString(input)) return `Your string is ${input}`;
+//   return throwError("This function only accepts a string or number");
+// };
+// Custom Type Guards - Used to narrow down the type of a variable
+// const isNumber = (input: any): input is number => {
+//   return typeof input === "number";
+// };
+// const isString = (input: any): input is string => {
+//   return typeof input === "string";
+// };
+// Lesson 5 - Type Assertions
+// type one = string;
+// type two = string | number;
+// type three = "Hello";
 // Convert to more or less specific types
-let a = "Hello";
-let b = a; // b is now a string or number
-let c = b; // c is now literally 'Hello'
-let d = "Hello"; // d is now a string
-let e = "Hello"; // e is now a string or number
+// let a: one = "Hello";
+// let b = a as two; // b is now a string or number
+// let c = b as three; // c is now literally 'Hello'
+// let d = <one>"Hello"; // d is now a string
+// let e = <string | number>"Hello"; // e is now a string or number
 // Usecase - Assertions for narrowing
-const addOrConcat = (a, b, c) => {
-    if (c === "add")
-        return a + b;
-    return `` + a + b;
-};
-let myVal = addOrConcat(1, 2, "add");
+// const addOrConcat = (
+//   a: number,
+//   b: number,
+//   c: "add" | "concat"
+// ): number | string => {
+//   if (c === "add") return a + b;
+//   return `` + a + b;
+// };
+// let myVal: number = addOrConcat(1, 2, "add") as number ;
 // Usecase - Double Assertions for type conversion
 // 10 as string; // Error
 // 10 as unknown as string; // No Error
 // Usecase - Assertions for DOM manipulation
-const img = document.querySelector('img');
-const myImg = document.querySelector('#img');
-img.src;
-myImg.src; // No Error
+// const img = document.querySelector('img')!
+// const myImg = document.querySelector('#img') as HTMLImageElement
+// img.src
+// myImg.src  // No Error
+// Lesson 6 - Interfaces and Classes
+// Classes
+// class Coder {
+//   name: string;
+//   age: number;
+//   canVote: boolean;
+//   constructor(name: string, age: number, canVote: boolean) {
+//     this.name = name;
+//     this.age = age;
+//     this.canVote = canVote;
+//   }
+//   greet() {
+//     return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
+//   }
+// }
+// const coder1 = new Coder("Cleve", 20, true);
+// console.log(coder1.greet());
+// Visibility Modifiers
+class coder {
+    constructor(name, age, lang = "TypeScript", canVote) {
+        this.name = name;
+        this.age = age;
+        this.lang = lang;
+        this.canVote = canVote;
+        this.name = name;
+        this.age = age;
+        this.canVote = canVote;
+        this.lang = lang;
+    }
+    greet() {
+        return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
+    }
+    getAge() {
+        return this.age;
+    }
+}
+const coder1 = new coder("Cleve", 20, "JS", true);
+console.log(coder1.greet());
+console.log(coder1.getAge());
+// console.log(coder1.aanVote)ge);
+// console.log(coder1.c;
+// EXtening Classes
+class WebDev extends coder {
+    constructor(computer, name, lang, age, canVote) {
+        super(name, age, "", canVote);
+        this.computer = computer;
+        this.computer = computer;
+    }
+    getLang() {
+        return this.lang;
+    }
+}
+class Guitarist {
+    constructor(name, instrument) {
+        this.name = name;
+        this.instrument = instrument;
+    }
+    play(action) {
+        return `${this.name} ${action} the ${this.instrument}`;
+    }
+}
+const guitarist = new Guitarist("Cleve", "Guitar");
+console.log(guitarist.play("plays"));
+/////////////////////////////////////////////////////////
+// Static Class Members
+class Person {
+    static getCount() {
+        return Person.count;
+    }
+    constructor(name) {
+        this.name = name;
+        this.id = Person.count++;
+    }
+}
+Person.count = 0;
+const John = new Person("John");
+const Jane = new Person("Jane");
+const Jack = new Person("Jack");
+console.log(Person.count);
+console.log(John.id);
+console.log(Jane.id);
+console.log(Jack.id);
+///////////////////////////////////////////////////////
+// Getters and Setters
+class Bands {
+    constructor() {
+        this.dataState = [];
+    }
+    get data() {
+        return this.dataState;
+    }
+    set data(value) {
+        if (Array.isArray(value) &&
+            value.every((item) => typeof item === "string")) {
+            this.dataState = value;
+            return;
+        }
+        else
+            throw new Error("Param is not an array of strings");
+    }
+}
+const MyBands = new Bands();
+MyBands.data = ["Metallica", "Slipknot", "Korn", "Limp Bizkit"];
+console.log(MyBands.data);
+MyBands.data = [...MyBands.data, "ZZ Top"];
+console.log(MyBands.data);
+// MyBands.data = "Van Halen"; // Error
