@@ -308,7 +308,7 @@ class coder {
     private age: number,
     protected lang: string = "TypeScript",
     protected canVote: boolean
-  ){
+  ) {
     this.name = name;
     this.age = age;
     this.canVote = canVote;
@@ -324,7 +324,7 @@ class coder {
   }
 }
 
-const coder1 = new coder("Cleve", 20, 'JS' ,true);
+const coder1 = new coder("Cleve", 20, "JS", true);
 console.log(coder1.greet());
 console.log(coder1.getAge());
 // console.log(coder1.aanVote)ge);
@@ -338,9 +338,8 @@ class WebDev extends coder {
     lang: string,
     age: number,
     canVote: boolean
-  )
-  {
-    super(name, age, '' ,canVote);
+  ) {
+    super(name, age, "", canVote);
     this.computer = computer;
   }
 
@@ -353,9 +352,9 @@ class WebDev extends coder {
 
 // Interfaces
 interface Musician {
-  name: string,
-  instrument: string,
-  play(action: string): string
+  name: string;
+  instrument: string;
+  play(action: string): string;
 }
 
 class Guitarist implements Musician {
@@ -372,5 +371,31 @@ class Guitarist implements Musician {
   }
 }
 
-const guitarist = new Guitarist('Cleve', 'Guitar');
-console.log(guitarist.play('plays'));
+const guitarist = new Guitarist("Cleve", "Guitar");
+console.log(guitarist.play("plays"));
+
+/////////////////////////////////////////////////////////
+
+// Static Class Members
+class Person {
+  static count: number = 0;
+
+  static getCount() {
+    return Person.count;
+  }
+
+  public id: number;
+
+  constructor(public name: string) {
+    this.id = Person.count++;
+  }
+}
+
+const John = new Person("John");
+const Jane = new Person("Jane");
+const Jack = new Person("Jack");
+
+console.log(Person.count);
+console.log(John.id);
+console.log(Jane.id);
+console.log(Jack.id);
