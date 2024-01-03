@@ -86,17 +86,45 @@ type Person = {
   canVote: boolean;
 };
 
+interface PersonInterface {
+  name?: string;
+  age: (string | number)[];
+  canVote: boolean;
+}
+
 let person: Person = {
   name: "Cleve",
   age: [20, "twenty"],
   canVote: true,
 };
 
-person = {
-  name: "Isaac",
+let person2: PersonInterface = {
+  name: "Cleve",
   age: [20, "twenty"],
   canVote: true,
 };
 
+const greetPerson = (person: Person) => {
+  return `Hello ${person.name}`!;
+};
 
+const greetPerson2 = (person: PersonInterface) => {
+  if (person.name) {
+    return `Hello ${person.name?.toUpperCase()}`!;
+  }
+  return `Hello`!;
+};
 
+console.log(greetPerson(person));
+console.log(greetPerson2(person2));
+
+// Enums - Are added to the language at runtime
+
+enum Direction {
+  Up,
+  Down,
+  Left,
+  Right,
+}
+
+console.log(Direction.Up); // 0
