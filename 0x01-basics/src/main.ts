@@ -229,8 +229,17 @@ const infiniteLoop = () => {
 
 // Using the never type
 const numberOrString = (input: number | string): string => {
-  if (typeof input === "number") return `Your number is ${input}`;
+  if (isNumber(input)) return `Your number is ${input}`;
 
-  if (typeof input === "string") return `Your string is ${input}`;
+  if (isString(input)) return `Your string is ${input}`;
   return throwError("This function only accepts a string or number");
+};
+
+// Custom Type Guards - Used to narrow down the type of a variable
+const isNumber = (input: any): input is number => {
+  return typeof input === "number";
+};
+
+const isString = (input: any): input is string => {
+  return typeof input === "string";
 };
