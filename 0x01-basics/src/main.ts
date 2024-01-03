@@ -49,13 +49,13 @@
 // moreMixed.push(false);
 // moreMixed.push({ name: "Cleve" }); // Error
 
-let arr: string[] = [];
-arr.push("one");
+// let arr: string[] = [];
+// arr.push("one");
 
-// Tuples
-let myTuple: [string, number, boolean] = ["one", 2, true];
+// // Tuples
+// let myTuple: [string, number, boolean] = ["one", 2, true];
 
-let mixedArr = ["one", 2, true];
+// let mixedArr = ["one", 2, true];
 
 // myTuple =
 //   mixedArr; /* Error - Returns an error because the types are different, but the structure is the same */
@@ -64,16 +64,16 @@ let mixedArr = ["one", 2, true];
 // tuple to an array, it will only check the structure and not the types */
 
 // Objects
-let myObj: object;
-myObj = []; // No Error
-console.log(typeof myObj);
-myObj = {}; // No Error
+// let myObj: object;
+// myObj = []; // No Error
+// console.log(typeof myObj);
+// myObj = {}; // No Error
 
-const exampleObj = {
-  name: "Cleve",
-  age: 20,
-  canVote: true,
-};
+// const exampleObj = {
+//   name: "Cleve",
+//   age: 20,
+//   canVote: true,
+// };
 
 // exampleObj.name = 20; // Error
 // exampleObj.age = "Cleve"; // Error
@@ -223,9 +223,9 @@ const exampleObj = {
 
 // console.log(throwError("Error Message"));
 
-const infiniteLoop = () => {
-  while (!true) {}
-};
+// const infiniteLoop = () => {
+//   while (!true) {}
+// };
 
 // Using the never type
 // const numberOrString = (input: number | string): string => {
@@ -245,37 +245,79 @@ const infiniteLoop = () => {
 // };
 
 // Lesson 5 - Type Assertions
-type one = string;
-type two = string | number;
-type three = "Hello";
+// type one = string;
+// type two = string | number;
+// type three = "Hello";
 
 // Convert to more or less specific types
-let a: one = "Hello";
-let b = a as two; // b is now a string or number
-let c = b as three; // c is now literally 'Hello'
+// let a: one = "Hello";
+// let b = a as two; // b is now a string or number
+// let c = b as three; // c is now literally 'Hello'
 
-let d = <one>"Hello"; // d is now a string
-let e = <string | number>"Hello"; // e is now a string or number
+// let d = <one>"Hello"; // d is now a string
+// let e = <string | number>"Hello"; // e is now a string or number
 
 // Usecase - Assertions for narrowing
-const addOrConcat = (
-  a: number,
-  b: number,
-  c: "add" | "concat"
-): number | string => {
-  if (c === "add") return a + b;
-  return `` + a + b;
-};
+// const addOrConcat = (
+//   a: number,
+//   b: number,
+//   c: "add" | "concat"
+// ): number | string => {
+//   if (c === "add") return a + b;
+//   return `` + a + b;
+// };
 
-let myVal: number = addOrConcat(1, 2, "add") as number ;
+// let myVal: number = addOrConcat(1, 2, "add") as number ;
 
 // Usecase - Double Assertions for type conversion
 // 10 as string; // Error
 // 10 as unknown as string; // No Error
 
 // Usecase - Assertions for DOM manipulation
-const img = document.querySelector('img')!
-const myImg = document.querySelector('#img') as HTMLImageElement
+// const img = document.querySelector('img')!
+// const myImg = document.querySelector('#img') as HTMLImageElement
 
-img.src
-myImg.src  // No Error
+// img.src
+// myImg.src  // No Error
+
+// Lesson 6 - Interfaces and Classes
+// Classes
+// class Coder {
+//   name: string;
+//   age: number;
+//   canVote: boolean;
+
+//   constructor(name: string, age: number, canVote: boolean) {
+//     this.name = name;
+//     this.age = age;
+//     this.canVote = canVote;
+//   }
+
+//   greet() {
+//     return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
+//   }
+// }
+
+// const coder1 = new Coder("Cleve", 20, true);
+// console.log(coder1.greet());
+
+// Visibility Modifiers
+class coder {
+  constructor(
+    public readonly name: string,
+    private age: number,
+    protected canVote: boolean
+  ){
+    this.name = name;
+    this.age = age;
+    this.canVote = canVote;
+  }
+
+  greet() {
+    return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
+  }
+}
+
+const coder1 = new coder("Cleve", 20, true);
+console.log(coder1.greet());
+
