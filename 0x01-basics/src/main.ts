@@ -351,83 +351,117 @@ class WebDev extends coder {
 /////////////////////////////////////////////////
 
 // Interfaces
-interface Musician {
-  name: string;
-  instrument: string;
-  play(action: string): string;
-}
+// interface Musician {
+//   name: string;
+//   instrument: string;
+//   play(action: string): string;
+// }
 
-class Guitarist implements Musician {
-  name: string;
-  instrument: string;
+// class Guitarist implements Musician {
+//   name: string;
+//   instrument: string;
 
-  constructor(name: string, instrument: string) {
-    this.name = name;
-    this.instrument = instrument;
-  }
+//   constructor(name: string, instrument: string) {
+//     this.name = name;
+//     this.instrument = instrument;
+//   }
 
-  play(action: string): string {
-    return `${this.name} ${action} the ${this.instrument}`;
-  }
-}
+//   play(action: string): string {
+//     return `${this.name} ${action} the ${this.instrument}`;
+//   }
+// }
 
-const guitarist = new Guitarist("Cleve", "Guitar");
-console.log(guitarist.play("plays"));
+// const guitarist = new Guitarist("Cleve", "Guitar");
+// console.log(guitarist.play("plays"));
 
 /////////////////////////////////////////////////////////
 
 // Static Class Members
-class Person {
-  static count: number = 0;
+// class Person {
+//   static count: number = 0;
 
-  static getCount() {
-    return Person.count;
-  }
+//   static getCount() {
+//     return Person.count;
+//   }
 
-  public id: number;
+//   public id: number;
 
-  constructor(public name: string) {
-    this.id = Person.count++;
-  }
-}
+//   constructor(public name: string) {
+//     this.id = Person.count++;
+//   }
+// }
 
-const John = new Person("John");
-const Jane = new Person("Jane");
-const Jack = new Person("Jack");
+// const John = new Person("John");
+// const Jane = new Person("Jane");
+// const Jack = new Person("Jack");
 
-console.log(Person.count);
-console.log(John.id);
-console.log(Jane.id);
-console.log(Jack.id);
+// console.log(Person.count);
+// console.log(John.id);
+// console.log(Jane.id);
+// console.log(Jack.id);
 
 ///////////////////////////////////////////////////////
 // Getters and Setters
-class Bands {
-  private dataState: string[];
+// class Bands {
+//   private dataState: string[];
 
-  constructor() {
-    this.dataState = [];
-  }
+//   constructor() {
+//     this.dataState = [];
+//   }
 
-  public get data(): string[] {
-    return this.dataState;
-  }
+//   public get data(): string[] {
+//     return this.dataState;
+//   }
 
-  public set data(value: string[]) {
-    if (
-      Array.isArray(value) &&
-      value.every((item) => typeof item === "string")
-    ) {
-      this.dataState = value;
-      return;
-    } else throw new Error("Param is not an array of strings");
-  }
-}
+//   public set data(value: string[]) {
+//     if (
+//       Array.isArray(value) &&
+//       value.every((item) => typeof item === "string")
+//     ) {
+//       this.dataState = value;
+//       return;
+//     } else throw new Error("Param is not an array of strings");
+//   }
+// }
 
-const MyBands = new Bands();
-MyBands.data = ["Metallica", "Slipknot", "Korn", "Limp Bizkit"];
-console.log(MyBands.data);
-MyBands.data = [...MyBands.data, "ZZ Top"];
-console.log(MyBands.data);
+// const MyBands = new Bands();
+// MyBands.data = ["Metallica", "Slipknot", "Korn", "Limp Bizkit"];
+// console.log(MyBands.data);
+// MyBands.data = [...MyBands.data, "ZZ Top"];
+// console.log(MyBands.data);
 // MyBands.data = "Van Halen"; // Error
 
+///////////////////////////////////////////////////////
+// Index Signatures
+
+interface TransactionObj {
+  [index: string]: number;
+}
+
+// interface TransactionObj {
+//   pizza: number;
+//   books: number;
+//   job: number;
+// }
+
+const transactionToday: TransactionObj = {
+  pizza: -10,
+  books: -5,
+  job: 50,
+};
+
+const prop: string = "pizza";
+console.log(prop);
+
+console.log(transactionToday.pizza);
+console.log(transactionToday["pizza"]);
+// console.log(transactionToday[prop]); //
+
+const todaysNet = (transactions: TransactionObj): number => {
+  let total = 0;
+  for (const transaction in transactions) {
+    total += transactions[transaction];
+    // total += transactions.transaction
+  }
+  return total;
+};

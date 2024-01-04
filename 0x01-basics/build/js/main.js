@@ -268,58 +268,26 @@ class WebDev extends coder {
         return this.lang;
     }
 }
-class Guitarist {
-    constructor(name, instrument) {
-        this.name = name;
-        this.instrument = instrument;
+// interface TransactionObj {
+//   pizza: number;
+//   books: number;
+//   job: number;
+// }
+const transactionToday = {
+    pizza: -10,
+    books: -5,
+    job: 50,
+};
+const prop = "pizza";
+console.log(prop);
+console.log(transactionToday.pizza);
+console.log(transactionToday["pizza"]);
+// console.log(transactionToday[prop]); //
+const todaysNet = (transactions) => {
+    let total = 0;
+    for (const transaction in transactions) {
+        total += transactions[transaction];
+        // total += transactions.transaction
     }
-    play(action) {
-        return `${this.name} ${action} the ${this.instrument}`;
-    }
-}
-const guitarist = new Guitarist("Cleve", "Guitar");
-console.log(guitarist.play("plays"));
-/////////////////////////////////////////////////////////
-// Static Class Members
-class Person {
-    static getCount() {
-        return Person.count;
-    }
-    constructor(name) {
-        this.name = name;
-        this.id = Person.count++;
-    }
-}
-Person.count = 0;
-const John = new Person("John");
-const Jane = new Person("Jane");
-const Jack = new Person("Jack");
-console.log(Person.count);
-console.log(John.id);
-console.log(Jane.id);
-console.log(Jack.id);
-///////////////////////////////////////////////////////
-// Getters and Setters
-class Bands {
-    constructor() {
-        this.dataState = [];
-    }
-    get data() {
-        return this.dataState;
-    }
-    set data(value) {
-        if (Array.isArray(value) &&
-            value.every((item) => typeof item === "string")) {
-            this.dataState = value;
-            return;
-        }
-        else
-            throw new Error("Param is not an array of strings");
-    }
-}
-const MyBands = new Bands();
-MyBands.data = ["Metallica", "Slipknot", "Korn", "Limp Bizkit"];
-console.log(MyBands.data);
-MyBands.data = [...MyBands.data, "ZZ Top"];
-console.log(MyBands.data);
-// MyBands.data = "Van Halen"; // Error
+    return total;
+};
