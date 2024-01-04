@@ -30,3 +30,16 @@ const monthlyIncomes = {
 for (const revenue in monthlyIncomes) {
     console.log(`${revenue}: ${monthlyIncomes[revenue]}`);
 }
+///////////////////////////////////////////////////////////////////////////////
+// Lesson 8 - Generics
+const echoStr = (arg) => arg; // echoes a string
+// Generic
+const echo = (arg) => arg; // echoes any argument passed
+const isObj = (arg) => {
+    return typeof arg === "object" && !Array.isArray(arg) && arg !== null;
+};
+console.log(isObj({ name: "Jhhn" }));
+console.log(isObj(true));
+console.log(isObj("John"));
+console.log(isObj([1, 2, 3]));
+console.log(isObj(null));
