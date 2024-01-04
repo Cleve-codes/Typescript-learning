@@ -291,3 +291,8 @@ const todaysNet = (transactions) => {
     }
     return total;
 };
+const student = {
+    name: 'Cleve',
+    GPA: 3.5,
+    classes: [100, 200],
+};
