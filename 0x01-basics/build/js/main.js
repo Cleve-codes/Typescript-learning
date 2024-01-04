@@ -12,9 +12,21 @@ const student1 = {
     GPA: 4.5,
     classes: [200, 300],
 };
-for (const key in student1) {
-    console.log(`${key}: ${student1[key]}`); // keyof creates a union type
-}
+// for (const key in student1) {
+//   console.log(`${key}: ${student1[key as keyof Student1]}`); // keyof creates a union type
+// }
 Object.keys(student1).map((key) => {
     console.log(`${key}: ${student1[key]}`);
 });
+const logStudentKey = (student1, key) => {
+    console.log(`Student ${key}: ${student1[key]}`);
+};
+logStudentKey(student1, "name");
+const monthlyIncomes = {
+    salary: 500,
+    bonus: 100,
+    sidehustle: 250,
+};
+for (const revenue in monthlyIncomes) {
+    console.log(`${revenue}: ${monthlyIncomes[revenue]}`);
+}

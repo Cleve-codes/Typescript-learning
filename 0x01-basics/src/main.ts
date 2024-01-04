@@ -501,10 +501,36 @@ const student1: Student1 = {
   classes: [200, 300],
 };
 
-for (const key in student1) {
-  console.log(`${key}: ${student1[key as keyof Student1]}`); // keyof creates a union type
-}
+// for (const key in student1) {
+//   console.log(`${key}: ${student1[key as keyof Student1]}`); // keyof creates a union type
+// }
 
 Object.keys(student1).map((key) => {
   console.log(`${key}: ${student1[key as keyof typeof student1]}`);
 });
+
+const logStudentKey = (student1: Student1, key: keyof Student1): void => {
+  console.log(`Student ${key}: ${student1[key]}`);
+};
+
+logStudentKey(student1, "name");
+
+//////////////////////////////////////////////////////
+// Record Utility type
+
+// interface Incomes {
+//   [key: string]: number
+// }
+
+type Streams = "salary" | "bonus" | "sidehustle";
+type Incomes = Record<Streams, number>;
+
+const monthlyIncomes: Incomes = {
+  salary: 500,
+  bonus: 100,
+  sidehustle: 250,
+};
+
+for (const revenue in monthlyIncomes) {
+  console.log(`${revenue}: ${monthlyIncomes[revenue as keyof Incomes]}`);
+}
