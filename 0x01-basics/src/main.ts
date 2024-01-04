@@ -302,51 +302,51 @@
 // console.log(coder1.greet());
 
 // Visibility Modifiers
-class coder {
-  constructor(
-    public readonly name: string,
-    private age: number,
-    protected lang: string = "TypeScript",
-    protected canVote: boolean
-  ) {
-    this.name = name;
-    this.age = age;
-    this.canVote = canVote;
-    this.lang = lang;
-  }
+// class coder {
+//   constructor(
+//     public readonly name: string,
+//     private age: number,
+//     protected lang: string = "TypeScript",
+//     protected canVote: boolean
+//   ) {
+//     this.name = name;
+//     this.age = age;
+//     this.canVote = canVote;
+//     this.lang = lang;
+//   }
 
-  greet() {
-    return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
-  }
+//   greet() {
+//     return `Hello ${this.name} is ${this.age} years old and can vote: ${this.canVote}`;
+//   }
 
-  public getAge() {
-    return this.age;
-  }
-}
+//   public getAge() {
+//     return this.age;
+//   }
+// }
 
-const coder1 = new coder("Cleve", 20, "JS", true);
-console.log(coder1.greet());
-console.log(coder1.getAge());
+// const coder1 = new coder("Cleve", 20, "JS", true);
+// console.log(coder1.greet());
+// console.log(coder1.getAge());
 // console.log(coder1.aanVote)ge);
 // console.log(coder1.c;
 
 // EXtening Classes
-class WebDev extends coder {
-  constructor(
-    public computer: string,
-    name: string,
-    lang: string,
-    age: number,
-    canVote: boolean
-  ) {
-    super(name, age, "", canVote);
-    this.computer = computer;
-  }
+// class WebDev extends coder {
+//   constructor(
+//     public computer: string,
+//     name: string,
+//     lang: string,
+//     age: number,
+//     canVote: boolean
+//   ) {
+//     super(name, age, "", canVote);
+//     this.computer = computer;
+//   }
 
-  getLang() {
-    return this.lang;
-  }
-}
+//   getLang() {
+//     return this.lang;
+//   }
+// }
 
 /////////////////////////////////////////////////
 
@@ -434,9 +434,9 @@ class WebDev extends coder {
 ///////////////////////////////////////////////////////
 // Index Signatures
 
-interface TransactionObj {
-  [index: string]: number;
-}
+// interface TransactionObj {
+//   [index: string]: number;
+// }
 
 // interface TransactionObj {
 //   pizza: number;
@@ -444,40 +444,67 @@ interface TransactionObj {
 //   job: number;
 // }
 
-const transactionToday: TransactionObj = {
-  pizza: -10,
-  books: -5,
-  job: 50,
-};
+// const transactionToday: TransactionObj = {
+//   pizza: -10,
+//   books: -5,
+//   job: 50,
+// };
 
-const prop: string = "pizza";
-console.log(prop);
+// const prop: string = "pizza";
+// console.log(prop);
 
-console.log(transactionToday.pizza);
-console.log(transactionToday["pizza"]);
+// console.log(transactionToday.pizza);
+// console.log(transactionToday["pizza"]);
 // console.log(transactionToday[prop]); //
 
-const todaysNet = (transactions: TransactionObj): number => {
-  let total = 0;
-  for (const transaction in transactions) {
-    total += transactions[transaction];
-    // total += transactions.transaction
-  }
-  return total;
-};
+// const todaysNet = (transactions: TransactionObj): number => {
+//   let total = 0;
+//   for (const transaction in transactions) {
+//     total += transactions[transaction];
+//     // total += transactions.transaction
+//   }
+//   return total;
+// };
 
 ///////////////////////////////////////////////////////////////
 
 interface Student {
-  [index: string]: string | number | number[] | undefined
-  name: string
-  GPA: number
-  classes?: number[]
+  [index: string]: string | number | number[] | undefined;
+  name: string;
+  GPA: number;
+  classes?: number[];
 }
 
 const student: Student = {
-  name: 'Cleve',
+  name: "Cleve",
   GPA: 3.5,
   classes: [100, 200],
+};
+
+// console.log(student.test)
+
+// for (const key in student) {
+//   console.log(`${key}: ${student[key]}`);
+// }
+
+// Key Of assertion
+interface Student1 {
+  // [index: string]: string | number | number[] | undefined;
+  name: string;
+  GPA: number;
+  classes?: number[];
 }
 
+const student1: Student1 = {
+  name: "Dev",
+  GPA: 4.5,
+  classes: [200, 300],
+};
+
+for (const key in student1) {
+  console.log(`${key}: ${student1[key as keyof Student1]}`); // keyof creates a union type
+}
+
+Object.keys(student1).map((key) => {
+  console.log(`${key}: ${student1[key as keyof typeof student1]}`);
+});
